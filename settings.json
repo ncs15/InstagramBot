@@ -1,0 +1,21 @@
+{
+  "db": {
+    "database": "dbo.db"
+  },
+  "instagram": {
+    "user": "your_mail",
+    "pass": "your_pass"
+  },
+  "config": {
+	"headless":"no",  
+	"like_ratio":75,
+	"follow_ratio":30,
+    "days_to_unfollow": 3,
+	"max_followed_per_day": 200,
+    "likes_over": 200,
+	"int_users":["madonna"],
+    "hashtags": ["naturephotography"]
+  }
+}
+
+

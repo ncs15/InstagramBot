@@ -1,0 +1,2 @@
+selenium>=3.141.0
+sqlparse>=0.2.4
