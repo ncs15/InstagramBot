@@ -12,7 +12,7 @@ Well... the bot can:
 -run in the backgrond...so no distraction for you.
 
 
-Instruction.
+# Instruction.
 
 1. Modify "executable_path" from Main.py with your path to chromdriver;
 2. Modify the settings.py:
