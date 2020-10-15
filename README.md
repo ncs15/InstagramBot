@@ -6,9 +6,13 @@ This is a easy to use bot for an organic growing of IG account.
 
 Well... the bot can:
 -loop through predefine by user hashtags, like the post and follow the user which posted it at a predefined rate;
+
 -unfollow people after a predefine number of days;
+
 -scroll on newsfeed and like those posts in order to engage allready following people to like your posts;
+
 -search for those people that are following an account that interests you and follow them ( if you are a fan of cars, the bot will connect you with cars fans).
+
 -run in the backgrond...so no distraction for you.
 
 
