@@ -12,7 +12,7 @@ if ConfigHandler.HEADLESS=="yes":
     chrome_options.add_argument("--headless")
 
 #Change this to your own chromedriver path!
-webdriver = webdriver.Chrome(executable_path=r'C:\Users\Admin\Downloads\chromedriver.exe',options=chrome_options)
+webdriver = webdriver.Chrome(executable_path=r'path_to_chromdriver',options=chrome_options)
 #
 BotEngine.init(webdriver)
 time.sleep(5)
