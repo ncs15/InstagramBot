@@ -16,13 +16,22 @@ Instruction.
 
 1. Modify "executable_path" from Main.py with your path to chromdriver;
 2. Modify the settings.py:
+
 	-user and pass from IG account;
+	
 	-headless --> yes/no (yes if you want to run the bot in the background);
+	
 	-like and follow ratio, (75% and 25% are the defaults).. this is in order to avoid any IG problems:D;
+	
 	-days_to_unfollow --> the number of days to keep the followed users;
+	
 	-max_followed_per_day --> the top limit of followed users per day;
+	
 	-likes_over --> over this top, the bot do not give likes;
+	
 	-int_users --> the users of interest in order to gain followers from an area;
+	
 	-hashtags --> the hastags where the bot find new users.
+	
 3. Run Main.py
 
