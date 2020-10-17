@@ -14,6 +14,8 @@ class IGBot:
         self.home_page_link='https://www.instagram.com/'
         self.unfollow_xpath = '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button'
         self.follow_button_xpath='//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button'
+
+                                #'//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div/button'
         self.unfollow_confirm_xpath = '/html/body/div[4]/div/div/div/div[3]/button[1]'
         self.article_four='//*[@id="react-root"]/section/main/section/div[1]/div[2]/div/article[4]'
         self.article_four_like_button= '//*[@id="react-root"]/section/main/section/div[1]/div[2]/div/article[4]/div[3]/section[1]/span[1]/button'
@@ -382,14 +384,14 @@ class IGBot:
         webdriver.get('https://www.instagram.com/' + user + '/')
         print("Got to: ", user)
         sleep(random.randint(4, 8))
-        follow_button = webdriver.find_element_by_xpath(self.follow_button_xpath)
-        follow_txt = follow_button.find_element_by_css_selector("span").get_attribute("aria-label")
-        if follow_txt == "Follow":
-            sleep(random.randint(4, 8))
-            webdriver.find_element_by_xpath(self.follow_button).click()
+        try:
+            follow_button = webdriver.find_element_by_xpath(self.follow_button_xpath)
+            follow_button.click()
             DBUsers.add_user(user)
-            print(datetime.datetime.now(), " Following:", user)
-            sleep(random.randint(2, 3))
+        except:
+            print("Account is private/already followed in the pas or following")
+        print(datetime.datetime.now(), " Following:", user)
+        sleep(random.randint(2, 3))
 
 
     def interest_circle(self, webdriver):
@@ -401,7 +403,7 @@ class IGBot:
                 IGBot().getUserFollowers(webdriver,user)
         interest_users=DBUsers.get_viwed_users(all=False)
         print(len(interest_users))
-        if len(interest_users) > 2:
+        if len(interest_users) >= 2:
             interest_users[1] = interest_users[1][1:-1]
             for_follow = interest_users[1].replace("'", "").split(",")[:7]
             for_modify = interest_users[1].replace("'", "").split(",")[8:]
@@ -414,13 +416,9 @@ class IGBot:
             print(user_to_keep)
             print(for_follow)
             for user in for_follow:
-                # try:
                 IGBot().follow_user(webdriver ,user.strip())
-                # except:
-                #
 
-                #     print("Can't follow! (Already following or followed in the past)")
-                #     input("dfdf")
+
         else:
             pass
 
