@@ -18,16 +18,13 @@ def init(webdriver):
 
 def update(webdriver):
     bot = IGBot()
-    #Get start of time to calculate elapsed time later
-    _check_follow_list(webdriver)
     while True:
-        # bot.check_hashtag(webdriver)
         event=random.randint(1,4)
         print("Event: ",event)
         if event == 1:
             bot.like_on_home(webdriver)
         elif event == 2:
-            _check_follow_list(webdriver)
+            check_followers(webdriver)
         elif event == 3:
             bot.check_hashtag(webdriver)
         elif event == 4:
@@ -40,7 +37,7 @@ def update(webdriver):
         time.sleep(random.randint(200, 350))
 
 
-def _check_follow_list(webdriver):
+def check_followers(webdriver):
     bot = IGBot()
     print("Checking for users to unfollow...")
     #get the unfollow list
