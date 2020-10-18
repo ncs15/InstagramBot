@@ -1,6 +1,6 @@
 from time import sleep
 import datetime
-import DBUsers, ConfigHandler
+import Users, ConfigHandler
 import traceback
 import random
 from selenium.webdriver.common.keys import Keys
@@ -14,8 +14,6 @@ class IGBot:
         self.home_page_link='https://www.instagram.com/'
         self.unfollow_xpath = '//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div[2]/div/span/span[1]/button'
         self.follow_button_xpath='//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div/div/span/span[1]/button'
-
-                                #'//*[@id="react-root"]/section/main/div/header/section/div[1]/div[1]/div/div/button'
         self.unfollow_confirm_xpath = '/html/body/div[4]/div/div/div/div[3]/button[1]'
         self.article_four='//*[@id="react-root"]/section/main/section/div[1]/div[2]/div/article[4]'
         self.article_four_like_button= '//*[@id="react-root"]/section/main/section/div[1]/div[2]/div/article[4]/div[3]/section[1]/span[1]/button'
@@ -98,12 +96,12 @@ class IGBot:
                        webdriver.find_element_by_xpath(self.unfollow_confirm_xpath).click()
                        print(datetime.datetime.now()," Unfollowing:",user)
                        sleep(random.randint(3, 5))
-                       DBUsers.delete_user(user)
+                       Users.delete_user(user)
     
                 except Exception:
                     #is is possible that i already unfollow that user manually, so just delte it from db
                     print(datetime.datetime.now()," Ecxept unfollow: ",user)
-                    DBUsers.delete_user(user)
+                    Users.delete_user(user)
                     traceback.print_exc()
                     continue
             else:
@@ -226,7 +224,7 @@ class IGBot:
                         
                         # If username isn't stored in the database and the likes are in the acceptable range, follow change =25%
 
-                        followed_users = DBUsers.get_today_followed()
+                        followed_users = Users.get_today_followed()
 
 
                         if random.randint(0, 100) < ConfigHandler.FOLLOW_RATIO:
@@ -250,7 +248,7 @@ class IGBot:
                                     print("Followed: {0}, #{1}".format(username, followed_users))
     
                                     try:
-                                        DBUsers.add_user(username)
+                                        Users.add_user(username)
                                         print(datetime.datetime.now(), " Add to db: ", username)
                                     except:
                                         print("User already in db")
@@ -288,7 +286,7 @@ class IGBot:
                                     print(datetime.datetime.now(), " Like photo of: ", username)
                                     # Use DBUsers to add the new user to the database
                                 try:
-                                    DBUsers.add_liked_user(username)
+                                    Users.add_liked_user(username)
                                     print("DB: Add to liked users: ", username)
                                 except:
                                     print("DB: user already liked")
@@ -375,7 +373,7 @@ class IGBot:
                     break
         except:
             pass
-        DBUsers.add_viewed_user(str(int_user), str(followers))
+        Users.add_viewed_user(str(int_user), str(followers))
 
 
         return followers
@@ -387,7 +385,7 @@ class IGBot:
         try:
             follow_button = webdriver.find_element_by_xpath(self.follow_button_xpath)
             follow_button.click()
-            DBUsers.add_user(user)
+            Users.add_user(user)
         except:
             print("Account is private/already followed in the pas or following")
         print(datetime.datetime.now(), " Following:", user)
@@ -397,11 +395,11 @@ class IGBot:
     def interest_circle(self, webdriver):
         print(ConfigHandler.INT_USERS)
         for user in list(ConfigHandler.INT_USERS):
-            if user in DBUsers.get_viwed_users(all=True):
+            if user in Users.get_viwed_users(all=True):
                 print(user)
             else:
                 IGBot().getUserFollowers(webdriver,user)
-        interest_users=DBUsers.get_viwed_users(all=False)
+        interest_users=Users.get_viwed_users(all=False)
         print(len(interest_users))
         if len(interest_users) >= 2:
             interest_users[1] = interest_users[1][1:-1]
@@ -412,7 +410,7 @@ class IGBot:
                 i = i.replace(" ","")
                 user_to_keep.append(i)
             user_to_keep = str(user_to_keep)
-            DBUsers.update_viwed(user_to_keep, interest_users)
+            Users.update_viwed(user_to_keep, interest_users)
             print(user_to_keep)
             print(for_follow)
             for user in for_follow:
