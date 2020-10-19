@@ -44,3 +44,8 @@ usernames of a few pages that posts cars and the bot will do the rest);
 	
 3. Run Main.py
 
+
+
+See more info on the following medium post:
+
+https://python-noob.medium.com/instagram-bot-with-selenium-for-learning-web-testing-tools-fbe424c9ebe9
