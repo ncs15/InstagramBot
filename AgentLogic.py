@@ -28,6 +28,8 @@ class IGBot:
         self.button_next_secondpost='/html/body/div[4]/div[1]/div/div/a[2]'
         self.button_next_firstpost='/html/body/div[4]/div[1]/div/div/a'
         self.cookie_button ='/html/body/div[2]/div/div/div/div[2]/button[1]'
+        self.language_button ='//*[@id="react-root"]/section/main/section/div[3]/div[3]/nav/ul/li[11]/span/select'
+        self.english_language ='//*[@id="react-root"]/section/main/section/div[3]/div[3]/nav/ul/li[11]/span/select/option[6]'
 
     def login(self,webdriver):
 
@@ -74,6 +76,14 @@ class IGBot:
         except:
             print("No pop up")
 
+#Change Language
+        try:
+            webdriver.find_element_by_xpath(self.language_button).click()
+            sleep(1)
+            webdriver.find_element_by_xpath(self.english_language).click()
+            sleep(3)
+        except:
+                print("Language not changed")
 
     def unfollow_people(self,webdriver, people):
         print("_______________________________________Start Unfollow sequence_________________________________________________________________")
