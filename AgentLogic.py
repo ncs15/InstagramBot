@@ -82,8 +82,9 @@ class IGBot:
             sleep(1)
             webdriver.find_element_by_xpath(self.english_language).click()
             sleep(3)
+            print("Language changed to english")
         except:
-                print("Language not changed")
+            print("Language not changed")
 
     def unfollow_people(self,webdriver, people):
         print("_______________________________________Start Unfollow sequence_________________________________________________________________")
