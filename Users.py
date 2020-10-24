@@ -77,8 +77,12 @@ def get_today_followed():
   conn = sqlite3.connect(db_name)
   cursor = conn.cursor()
   now = datetime.datetime.now().date()
-  cursor.execute(f"SELECT * FROM followed_users WHERE date_added='{now}'")
-  results = cursor.fetchall()
+  try:
+    cursor.execute(f"SELECT * FROM followed_users WHERE date_added='{now}'")
+    results = cursor.fetchall()
+  except:
+    results=[]
+
   no=0
   for r in results:
     no+=1
